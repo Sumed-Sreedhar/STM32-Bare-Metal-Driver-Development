@@ -1,6 +1,6 @@
 # STM32CubeIDE build folders
-Debug/
-Release/
+**/Debug/
+**/Release/
 
 # Build artifacts
 *.elf
