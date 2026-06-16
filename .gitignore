@@ -1,0 +1,23 @@
+# STM32CubeIDE build folders
+Debug/
+Release/
+
+# Build artifacts
+*.elf
+*.bin
+*.hex
+*.map
+
+# Object and dependency files
+*.o
+*.d
+
+# Analysis files
+*.su
+*.cyclo
+
+# Eclipse/CubeIDE metadata
+.metadata/
+
+# Backup files
+*~
