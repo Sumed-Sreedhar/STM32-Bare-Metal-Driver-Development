@@ -33,34 +33,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := LED_ON
+BUILD_ARTIFACT_NAME := 01_GPIO_Basics
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-LED_ON.elf \
+01_GPIO_Basics.elf \
 
 MAP_FILES += \
-LED_ON.map \
+01_GPIO_Basics.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-LED_ON.list \
+01_GPIO_Basics.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: LED_ON.elf secondary-outputs
+main-build: 01_GPIO_Basics.elf secondary-outputs
 
 # Tool invocations
-LED_ON.elf LED_ON.map: $(OBJS) $(USER_OBJS) /home/sumed/Desktop/Embedded\ C/My_Workspace/target/LED_ON/STM32F446RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "LED_ON.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/sumed/Desktop/Embedded C/My_Workspace/target/LED_ON/STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LED_ON.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+01_GPIO_Basics.elf 01_GPIO_Basics.map: $(OBJS) $(USER_OBJS) /home/sumed/Desktop/Embedded\ C/My_Workspace/target/01_GPIO_Basics/STM32F446RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "01_GPIO_Basics.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/sumed/Desktop/Embedded C/My_Workspace/target/01_GPIO_Basics/STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="01_GPIO_Basics.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -69,14 +69,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-LED_ON.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "LED_ON.list"
+01_GPIO_Basics.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "01_GPIO_Basics.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) LED_ON.elf LED_ON.list LED_ON.map default.size.stdout
+	-$(RM) 01_GPIO_Basics.elf 01_GPIO_Basics.list 01_GPIO_Basics.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

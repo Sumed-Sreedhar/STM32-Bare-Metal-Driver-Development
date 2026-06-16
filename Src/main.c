@@ -27,7 +27,7 @@ int main(void)
 
     *(volatile uint32_t *) 0x40020000 |= (1 << 10); // Set PA5 as output
 
-    *(volatile uint32_t *) 0x40020014 |= (0 << 5); // Set PA5 high
+    *(volatile uint32_t *) 0x40020014 |= (1 << 5); // Set PA5 high
 
     while(1)
     {
