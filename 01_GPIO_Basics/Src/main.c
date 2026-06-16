@@ -21,16 +21,29 @@
 
 int main(void)
 {
-    *(volatile uint32_t *) 0x40023830 |= (1 << 0); // Enable GPIOA clock
+	volatile uint32_t * RCC = (volatile uint32_t *) 0x40023830; // RCC base address
 
-    *(volatile uint32_t *) 0x40020000 &= ~(3 << 10); // Clear mode bits for PA5
+	volatile uint32_t * GPIOA_MODER = (volatile uint32_t *) 0x40020000; // GPIOA_MODER register address
 
-    *(volatile uint32_t *) 0x40020000 |= (1 << 10); // Set PA5 as output
+	volatile uint32_t * GPIOA_ODR = (volatile uint32_t *) 0x40020014; // GPIOA_ODR register address
 
-    *(volatile uint32_t *) 0x40020014 |= (1 << 5); // Set PA5 high
+    *RCC |= (1 << 0); // Enable GPIOA clock
+
+    *GPIOA_MODER &= ~(3 << 10); // Clear mode bits for PA5
+
+    *GPIOA_MODER |= (1 << 10); // Set PA5 as output
+
 
     while(1)
     {
-    	;
+    	*GPIOA_ODR &= ~(1 << 5); // Set PA5 low
+
+    	for( volatile uint32_t i = 0; i < 1000000; i++); // Simple delay loop
+
+    	*GPIOA_ODR |= (1 << 5); // Set PA5 high
+
+    	for(volatile uint32_t i = 0; i < 1000000; i++); // Simple delay loop
+
+
     }
 }
